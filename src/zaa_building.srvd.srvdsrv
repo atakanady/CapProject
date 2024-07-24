@@ -1,0 +1,4 @@
+@EndUserText.label: 'Building Service'
+define service Zaa_building {
+  expose zaa_i_buildings as Building;
+}

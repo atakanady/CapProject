@@ -1,0 +1,33 @@
+managed implementation in class zbp_aa_i_buildings unique;
+strict;
+
+define behavior for zaa_i_buildings //alias <alias_name>
+persistent table zaa_buildings
+lock master
+authorization master ( instance )
+early numbering
+//etag master <field_name>
+{
+  create;
+  update;
+  delete;
+
+    field ( readonly ) Building_Id, Created_At;
+
+  validation    validateNRooms on save { create; field created_at; }
+
+    mapping for zaa_buildings
+  {
+    building_id     = building_id;
+    building_name   = building_name;
+    n_rooms         = n_rooms;
+    address_line    = address_line;
+    City            = city;
+    State           = state;
+    Country         = country;
+//    created_by      = created_by;
+    created_at      = created_at;
+//    last_changed_by = last_changed_by;
+//    last_changed_at = last_changed_at;
+  }
+}
