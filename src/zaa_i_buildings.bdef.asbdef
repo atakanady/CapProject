@@ -25,9 +25,7 @@ early numbering
     City            = city;
     State           = state;
     Country         = country;
-//    created_by      = created_by;
+    created_by      = created_by;
     created_at      = created_at;
-//    last_changed_by = last_changed_by;
-//    last_changed_at = last_changed_at;
   }
 }

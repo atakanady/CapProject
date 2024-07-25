@@ -80,14 +80,7 @@ CLASS lhc_zaa_i_buildings IMPLEMENTATION.
     LOOP AT lt_createdat INTO DATA(ls_created).
 
 
-*      DATA(lv_formatted_date) = |{ lv_date+6(2) }.{ lv_date+4(2) }.{ lv_date+0(4) }|.
-
-*      CALL METHOD cl_abap_tstmp=>timet_to_tstmp
-*        EXPORTING
-*          time_t = ls_created-created_at
-*        IMPORTING
-
-    endloop.
+    ENDLOOP.
 
 *    DATA gt_building TYPE TABLE FOR UPDATE zaa_i_buildings.
 *
@@ -160,24 +153,29 @@ CLASS lhc_zaa_i_buildings IMPLEMENTATION.
 **      INTO TABLE @DATA(lt_existing_records).
 
 
-    ENDMETHOD.
+  ENDMETHOD.
 
-    METHOD earlynumbering_create.
+  METHOD earlynumbering_create.
+
+    DATA lv_formatted_date(10) TYPE c.
 *
-*    DATA(today) = cl_abap_context_info=>get_system_date( ).
-*    DATA(lv_formatted_date) = |{ today+6(2) }.{ today+4(2) }.{ today+0(4) }|.
+    DATA(today) = cl_abap_context_info=>get_system_date( ).
+    lv_formatted_date = |{ today+6(2) }.{ today+4(2) }.{ today+0(4) }|.
 
-      SELECT MAX( building_id ) FROM zaa_buildings INTO @DATA(new_id).
+    SELECT MAX( building_id ) FROM zaa_buildings INTO @DATA(new_id).
 
-        LOOP AT entities ASSIGNING FIELD-SYMBOL(<lfs_ent>).
-          new_id = new_id + 1.
+    LOOP AT entities INTO DATA(ls_ent).
 
-          INSERT VALUE #( %cid = <lfs_ent>-%cid
-                            building_id = new_id
-                            ) INTO TABLE mapped-zaa_i_buildings.
+      new_id = new_id + 1.
 
-        ENDLOOP.
+      INSERT VALUE #( %cid = ls_ent-%cid
+                        building_id = new_id
+                        created_at = lv_formatted_date
+                        ) INTO TABLE mapped-zaa_i_buildings.
 
-      ENDMETHOD.
+
+    ENDLOOP.
+
+  ENDMETHOD.
 
 ENDCLASS.

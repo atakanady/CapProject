@@ -15,8 +15,6 @@
 define root view entity zaa_i_buildings
   as select from zaa_buildings
 {
-
-
       @UI.facet: [{ id: 'Building',
           purpose: #STANDARD,
           type: #IDENTIFICATION_REFERENCE,
@@ -33,55 +31,44 @@ define root view entity zaa_i_buildings
           targetQualifier: 'ChangeLog',
           label:'Change Log'
         }]
-
+        
+      @EndUserText:{label: 'ID '}
+  key building_id,
+      @EndUserText.label: 'Created At'
+      @UI.fieldGroup: [{ qualifier: 'ChangeLog', position: 20 }]
+  key created_at,
       @UI: { lineItem: [{ position: 10 }],
       identification: [{ position: 10 }],
       selectionField: [{ position: 10 }] }
-      @EndUserText:{label: 'ID '}
-  key building_id,
-
-
-      @UI: { lineItem: [{ position: 20 }],
-      identification: [{ position: 20 }],
-      selectionField: [{ position: 20 }] }
       @EndUserText:{label: 'Building Name '}
       building_name,
-      @UI: { lineItem: [{ position: 30 }],
-      identification: [{ position: 30 }] }
+      @UI: { lineItem: [{ position: 20 }],
+      identification: [{ position: 20 }] }
       @EndUserText:{label: 'No of Rooms '}
       n_rooms,
-
+      @UI: { lineItem: [{ position: 30 }],
+      identification: [{ position: 30 }] }
       @UI.fieldGroup: [{ qualifier: 'Address', position: 10 }]
       @EndUserText:{label: 'Adress Line '}
       address_line,
+      @UI: { lineItem: [{ position: 40 }],
+      identification: [{ position: 40 }] }
       @UI.fieldGroup: [{ qualifier: 'Address', position: 20 }]
       @EndUserText:{label: 'City'}
       city,
+      @UI: { lineItem: [{ position: 50 }],
+      identification: [{ position: 50 }] }
       @UI.fieldGroup: [{ qualifier: 'Address', position: 30 }]
       @EndUserText:{label: 'State'}
       state,
+      @UI: { lineItem: [{ position: 60 }],
+      identification: [{ position: 60 }] }
       @UI.fieldGroup: [{ qualifier: 'Address', position: 40 }]
       @EndUserText:{label: 'Country '}
       country,
-      
-      @Semantics.systemDateTime.createdAt: true
-      @EndUserText.label: 'Created At'
-      @UI.fieldGroup: [{ qualifier: 'ChangeLog', position: 20 }]
-      created_at
-
-//      @Semantics.user.createdBy: true
-//      @UI.fieldGroup: [{ qualifier: 'ChangeLog', position: 10 }]
-//      @EndUserText:{label: 'Created by'}
-//      created_by,
-//
-//      @Semantics.user.lastChangedBy: true
-//      @EndUserText.label: 'Last Changed By'
-//      @UI.fieldGroup: [{ qualifier: 'ChangeLog', position: 30 }]
-//      last_changed_by,
-//      @Semantics.systemDateTime.lastChangedAt: true
-//      @EndUserText.label: 'Last Changed At'
-//      @UI.fieldGroup: [{ qualifier: 'ChangeLog', position: 40 }]
-//      last_changed_at
-
+      @Semantics.user.createdBy: true
+      @UI.fieldGroup: [{ qualifier: 'ChangeLog', position: 10 }]
+      @EndUserText:{label: 'Created by'}
+      created_by
 
 }
